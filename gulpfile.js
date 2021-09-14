@@ -40,7 +40,8 @@ const destPath = {
 //styleguide用
 const sg_srcPath = {
   'scss' : './src/sass/**/*.scss',
-  'js'   : './src/js/**/*.js'
+  'js'   : './src/js/**/*.js',
+  'watch': './src/**/*'
 }
 const sg_destPath = {
   'css'  : './htdocs/assets/css/',
@@ -108,7 +109,7 @@ const options = minimist( process.argv.slice(2),{ // process.argv=>コマンド�
     domain: 'sitedomain.local' // 引数初期値
   }
 });
-// ブラウザ設定
+// ローカルサーバー立ち上げ
 const browserSyncFunc = (done) => {
   browserSync.init( browserSyncOption );
   done();
@@ -143,10 +144,16 @@ const jsWatch = (done) => {
     .pipe( gulp.dest( destPath.js )),
     done();
 }
+// styleguide
+const sg_watch = (done) => {
+  return src( sg_srcPath.watch ),
+  done();
+}
 
 //---------------------------------------------------------
 //  styleguide
 //---------------------------------------------------------
+// styleguideタスク
 function styleguideTask() {
   const builder = fractal.web.builder();
   // 出力中のconsole表示設定
@@ -169,6 +176,14 @@ const styleguide_scssCompile = (done) => {
     .pipe( dest( sg_destPath.css )),
     done();
 }
+// ローカルサーバー立ち上げ
+const sg_browserSyncFunc = (done) => {
+  browserSync.init( sg_browserSyncOption );
+  done();
+}
+const sg_browserSyncOption = {
+  server: './styleguide/'
+}
 
 //---------------------------------------------------------
 //  watchタスク
@@ -177,6 +192,12 @@ const watchFiles = (done) => {
   watch( srcPath.scss, series( scssCompile ))
   watch( srcPath.php, series( phpWatch, browserSyncReload ))
   watch( srcPath.js, series( jsWatch, browserSyncReload ))
+  done();
+}
+const watchStyleguide = (done) => {
+  watch( sg_srcPath.watch, series( styleguide_scssCompile ))
+  watch( sg_srcPath.watch, series( sg_watch, styleguideTask ))
+  watch( sg_srcPath.watch, series( sg_watch, browserSyncReload ))
   done();
 }
 
@@ -189,5 +210,6 @@ exports.default = series(
 );
 
 exports.styleguide = series(
-  parallel( styleguide_scssCompile, styleguideTask )
+  parallel( styleguide_scssCompile, styleguideTask ),
+  parallel( watchStyleguide, sg_browserSyncFunc )
 );

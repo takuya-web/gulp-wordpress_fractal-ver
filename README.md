@@ -4,11 +4,18 @@
 
 ```
 gulp_wordpress
+├─ htdocs
 ├─ node_modules
 ├─ production     //作業ディレクトリです。
 |  ├─js
 |  ├─php
 |  └─sass
+├─ src
+|  ├─sass
+|  └─styleguide
+|    ├─components
+|    └─docs
+├─ styleguide
 ├─ gulpfile.js    //gulp設定ファイル
 ├─ package.json
 ├─ package-lock.json
@@ -41,4 +48,10 @@ PHP、Sass、Jsファイルの編集は```production```の中で行って下さ�
 ・production/sass・php・jsファイルの変更を監視。変更があった場合はブラウザを自動でリロード。  
 ※sassの変更に関してはリロードは行われず、変更部分だけ反映されます。
 
-## 4.コーディング
+## 4.スタイルガイド
+```src```の中で行って下さい。
+HTML：src-styleguide-components内で「ファイル名.hbs」
+View：
+Context：
+info：
+Notes：
