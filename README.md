@@ -51,7 +51,6 @@ PHP、Sass、Jsファイルの編集は```production```の中で行って下さ�
 ## 4.スタイルガイド
 ```src```の中で行って下さい。
 HTML：src-styleguide-components内で「ファイル名.hbs」
-View：
-Context：
-info：
-Notes：
+CSS ：sass内
+※その他はfractal公式をご参考願います。
+``` https://fractal.build/ ```

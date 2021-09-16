@@ -45,7 +45,7 @@ const sg_srcPath = {
 }
 const sg_destPath = {
   'css'  : './htdocs/assets/css/',
-  'js'   : './htdocs/assets/js'
+  'js'   : './htdocs/assets/js/'
 }
 
 //---------------------------------------------------------
@@ -149,7 +149,12 @@ const sg_watch = (done) => {
   return src( sg_srcPath.watch ),
   done();
 }
-
+// styleguide_Js
+const sg_jsWatch = (done) => {
+  return src( sg_srcPath.js )
+    .pipe( gulp.dest( sg_destPath.js )),
+    done();
+}
 //---------------------------------------------------------
 //  styleguide
 //---------------------------------------------------------
@@ -182,7 +187,8 @@ const sg_browserSyncFunc = (done) => {
   done();
 }
 const sg_browserSyncOption = {
-  server: './styleguide/'
+  server: './styleguide/',
+  notify: false
 }
 
 //---------------------------------------------------------
@@ -197,7 +203,8 @@ const watchFiles = (done) => {
 const watchStyleguide = (done) => {
   watch( sg_srcPath.watch, series( styleguide_scssCompile ))
   watch( sg_srcPath.watch, series( sg_watch, styleguideTask ))
-  watch( sg_srcPath.watch, series( sg_watch, browserSyncReload ))
+  // watch( sg_srcPath.watch, series( sg_watch, browserSyncReload ))
+  watch( sg_srcPath.js, series( sg_jsWatch, styleguideTask ))
   done();
 }
 
@@ -210,6 +217,6 @@ exports.default = series(
 );
 
 exports.styleguide = series(
-  parallel( styleguide_scssCompile, styleguideTask ),
+  parallel( sg_jsWatch, styleguide_scssCompile, styleguideTask ),
   parallel( watchStyleguide, sg_browserSyncFunc )
 );
