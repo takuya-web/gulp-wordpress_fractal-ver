@@ -20,7 +20,18 @@ gulp_wordpress
 ├─ package.json
 ├─ package-lock.json
 └─ README.md
-```
+```  
+  
+## --使用プラグイン--  
+・gulp-sass  
+・sass  
+・gulp-plumber  
+・gulp-notify  
+・gulp-postcss  
+・gulp-autoprefixer  
+・browser-sync  
+・minimist  
+・@frctl/fractal  
 
 ## 1.Local by FlywheelでWordPress開発環境を構築  
 ※```style.css```は予めご用意下さい。
@@ -50,7 +61,7 @@ PHP、Sass、Jsファイルの編集は```production```の中で行って下さ�
 
 ## 4.スタイルガイド
 ```src```の中で行って下さい。
-HTML：src-styleguide-components内で「ファイル名.hbs」
-CSS ：sass内
-※その他はfractal公式をご参考願います。
+HTML：src-styleguide-components内で「ファイル名.hbs」  
+CSS ：sass内  
+※その他はfractal公式をご参考願います。  
 ``` https://fractal.build/ ```
