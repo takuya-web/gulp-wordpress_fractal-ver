@@ -60,7 +60,7 @@ PHP、Sass、Jsファイルの編集は```production```の中で行って下さ�
 ※sassの変更に関してはリロードは行われず、変更部分だけ反映されます。
 
 ## 4.スタイルガイド
-```src```の中で行って下さい。
+```src```の中で行って下さい。  
 HTML：src-styleguide-components内で「ファイル名.hbs」  
 CSS ：sass内  
 ※その他はfractal公式をご参考願います。  
